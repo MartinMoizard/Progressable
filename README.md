@@ -1,5 +1,6 @@
 # Progressable
 [![Build Status](https://travis-ci.org/MartinMoizard/Progressable.svg?branch=master)](https://travis-ci.org/MartinMoizard/Progressable)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Progressable.svg)](https://img.shields.io/cocoapods/v/Progressable.svg)
 
 Progressable is a simple component to help you add a simple **animatable progress bar** to any UIView.
 
