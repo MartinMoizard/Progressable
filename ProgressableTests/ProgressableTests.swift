@@ -33,14 +33,19 @@ class ProgressableTests: XCTestCase {
         XCTAssertEqual(self.progressSearchBar.bounds.width, portraitFrame.width)
         XCTAssertEqual(self.progressSearchBar.progress, 0)
         XCTAssertEqual(self.progressSearchBar.progressLineWidth, 1)
-        XCTAssertEqual(self.progressSearchBar.progressColor, UIColor.gray)
+        XCTAssertEqual(self.progressSearchBar.progressColor, nil)
     }
     
     func testChangeSize() {
+        self.progressSearchBar.progress = 50
+        self.progressSearchBar.layoutIfNeeded()
+        XCTAssertEqual(self.progressSearchBar.progressLayer.bounds.width, portraitFrame.width / 2)
+        
         self.viewController.view.frame = landscapeFrame
         self.viewController.view.setNeedsLayout()
         self.viewController.view.layoutIfNeeded()
-        XCTAssertEqual(self.progressSearchBar.bounds.width, landscapeFrame.width)
+        
+        XCTAssertEqual(self.progressSearchBar.progressLayer.bounds.width, landscapeFrame.width / 2)
     }
     
     func testProgressWithAnimation() {

@@ -10,7 +10,7 @@ Progressable is a simple component to help you add a simple **animatable progres
 
 - make your `UIView` conform to the `Progressable` protocol.
 - call `self.initProgress()` in `init(frame: CGRect)` and `init?(coder aDecoder: NSCoder)`.
-- call `self.layoutProgress(withParentBounds: self.bounds)` in `func layoutSubviews()`.
+- call `self.layoutProgress()` in `func layoutSubviews()`.
 
 ## API
 
@@ -40,7 +40,7 @@ class ProgressSearchBar: UISearchBar, Progressable {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layoutProgress(withParentBounds: self.bounds)
+        self.layoutProgress()
     }
 }
 ```

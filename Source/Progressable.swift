@@ -11,10 +11,10 @@ import UIKit
 protocol Progressable: class {
     var progress: CGFloat { get set }
     var progressLineWidth: CGFloat { get set }
-    var progressColor: UIColor { get set }
+    var progressColor: UIColor? { get set }
     
     func initProgress()
-    func layoutProgress(withParentBounds parentBounds: CGRect)
+    func layoutProgress()
     func setProgress(progress: CGFloat, withDuration duration: TimeInterval)
 }
 
@@ -27,14 +27,14 @@ extension Progressable where Self: UIView {
         get {
             if let progress = objc_getAssociatedObject(self, &progressAttr) as? CGFloat {
                 return progress
+            } else {
+                self.progress = 0.0
+                return self.progress
             }
-            let progress: CGFloat = 0.0
-            objc_setAssociatedObject(self, &progressAttr, progress, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            return progress
         }
         set {
-            self.progressLayer.progress = newValue
             objc_setAssociatedObject(self, &progressAttr, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            self.setNeedsLayout()
         }
     }
     
@@ -42,84 +42,70 @@ extension Progressable where Self: UIView {
         get {
             if let progressLineWidth = objc_getAssociatedObject(self, &progressLineWidthAttr) as? CGFloat {
                 return progressLineWidth
+            } else {
+                self.progressLineWidth = 1.0
+                return self.progressLineWidth
             }
-            let progressLineWidth: CGFloat = 1.0
-            objc_setAssociatedObject(self, &progressLineWidthAttr, progressLineWidth, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            return progressLineWidth
         }
         set {
             objc_setAssociatedObject(self, &progressLineWidthAttr, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             self.setNeedsLayout()
-            self.setNeedsDisplay()
         }
     }
     
-    var progressColor: UIColor {
+    var progressColor: UIColor? {
         get {
-            return self.progressLayer.progressColor
+            guard let color = self.progressLayer.backgroundColor else { return nil }
+            return UIColor(cgColor: color)
         }
         set {
-            self.progressLayer.progressColor = newValue
+            self.progressLayer.backgroundColor = newValue?.cgColor
         }
     }
     
-    internal var progressLayer: ProgressLayer {
+    internal var progressLayer: CALayer {
         get {
-            if let progressLayer = objc_getAssociatedObject(self, &progressLayerAttr) as? ProgressLayer {
+            if let progressLayer = objc_getAssociatedObject(self, &progressLayerAttr) as? CALayer {
                 return progressLayer
+            } else {
+                self.progressLayer = CALayer()
+                self.progressLayer.anchorPoint = CGPoint.zero
+                return self.progressLayer
             }
-            let progressLayer = ProgressLayer()
-            objc_setAssociatedObject(self, &progressLayerAttr, progressLayer, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return progressLayer
         }
         set {
             objc_setAssociatedObject(self, &progressLayerAttr, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
+    internal func frame(forProgress progress: CGFloat) -> CGRect {
+        return CGRect(x: 0,
+                      y: self.bounds.height - CGFloat(self.progressLineWidth),
+                      width: (progress * self.bounds.width) / 100,
+                      height: CGFloat(self.progressLineWidth))
+    }
+    
     func initProgress() {
         self.layer.addSublayer(self.progressLayer)
     }
     
-    func layoutProgress(withParentBounds parentBounds: CGRect) {
-        self.progressLayer.frame = CGRect(x: 0,
-                                          y: parentBounds.height - CGFloat(self.progressLineWidth),
-                                          width: parentBounds.width,
-                                          height: CGFloat(self.progressLineWidth))
+    func layoutProgress() {
+        self.progressLayer.frame = self.frame(forProgress: self.progress)
     }
     
     func setProgress(progress: CGFloat, withDuration duration: TimeInterval) {
-        let animation = CABasicAnimation(keyPath: "progress")
-        animation.fromValue = self.progress
-        animation.toValue = progress
+        let toFrame = self.frame(forProgress: progress)
+        let toBounds = CGRect(x: 0, y: 0,
+                            width: toFrame.size.width,
+                            height: toFrame.size.height)
+        
+        let animation = CABasicAnimation(keyPath: "bounds")
+        animation.fromValue = NSValue(cgRect: self.progressLayer.bounds)
+        animation.toValue = NSValue(cgRect: toBounds)
         animation.duration = duration
+        
         self.progress = progress
-        self.progressLayer.add(animation, forKey: "progress")
-    }
-}
-
-class ProgressLayer: CAShapeLayer {
-    @NSManaged var progress: CGFloat
-    var progressColor: UIColor = UIColor.gray
-    
-    override class func needsDisplay(forKey key: String) -> Bool {
-        if key == "progress" || key == "progressColor" {
-            return true;
-        }
-        return super.needsDisplay(forKey: key)
-    }
-    
-    override func display() {
-        let l = presentation() ?? self
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0)
-        let context = UIGraphicsGetCurrentContext()
-        let yLine = self.bounds.height / 2;
-        context?.setLineWidth(self.bounds.height)
-        context?.setStrokeColor(self.progressColor.cgColor)
-        context?.move(to: CGPoint(x: 0, y: yLine))
-        context?.addLine(to: CGPoint(x: (l.progress * self.bounds.width) / 100, y: yLine))
-        context?.strokePath()
-        self.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
-        UIGraphicsEndImageContext()
+        self.progressLayer.frame = toFrame
+        self.progressLayer.add(animation, forKey: "bounds")
     }
 }

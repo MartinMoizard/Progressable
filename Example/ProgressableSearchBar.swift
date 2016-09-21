@@ -22,6 +22,6 @@ class ProgressSearchBar: UISearchBar, Progressable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layoutProgress(withParentBounds: self.bounds)
+        self.layoutProgress()
     }
 }
