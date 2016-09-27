@@ -23,7 +23,7 @@ var progressLineWidthAttr = "progressLineWidthAttr"
 var progressLayerAttr = "progressLayerAttr"
 
 extension Progressable where Self: UIView {
-    var progress: CGFloat {
+    public var progress: CGFloat {
         get {
             if let progress = objc_getAssociatedObject(self, &progressAttr) as? CGFloat {
                 return progress
@@ -38,7 +38,7 @@ extension Progressable where Self: UIView {
         }
     }
     
-    var progressLineWidth: CGFloat {
+    public var progressLineWidth: CGFloat {
         get {
             if let progressLineWidth = objc_getAssociatedObject(self, &progressLineWidthAttr) as? CGFloat {
                 return progressLineWidth
@@ -53,7 +53,7 @@ extension Progressable where Self: UIView {
         }
     }
     
-    var progressColor: UIColor? {
+    public var progressColor: UIColor? {
         get {
             guard let color = self.progressLayer.backgroundColor else { return nil }
             return UIColor(cgColor: color)
@@ -85,19 +85,19 @@ extension Progressable where Self: UIView {
                       height: CGFloat(self.progressLineWidth))
     }
     
-    func initProgress() {
+    public func initProgress() {
         self.layer.addSublayer(self.progressLayer)
     }
     
-    func layoutProgress() {
+    public func layoutProgress() {
         self.progressLayer.frame = self.frame(forProgress: self.progress)
     }
     
-    func setProgress(progress: CGFloat, withDuration duration: TimeInterval) {
+    public func setProgress(progress: CGFloat, withDuration duration: TimeInterval) {
         let toFrame = self.frame(forProgress: progress)
         let toBounds = CGRect(x: 0, y: 0,
-                            width: toFrame.size.width,
-                            height: toFrame.size.height)
+                              width: toFrame.size.width,
+                              height: toFrame.size.height)
         
         let animation = CABasicAnimation(keyPath: "bounds")
         animation.fromValue = NSValue(cgRect: self.progressLayer.bounds)

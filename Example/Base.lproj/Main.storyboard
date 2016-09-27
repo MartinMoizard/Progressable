@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Example View Controller-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ExampleViewController" customModule="Progressable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,28 +18,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="U9a-eg-d6U" customClass="ProgressSearchBar" customModule="Progressable" customModuleProvider="target">
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6Q-zg-995">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E23-pB-GlZ">
                                 <accessibility key="accessibilityConfiguration" label="Increment Progress Button"/>
                                 <state key="normal" title="Increment progress"/>
                                 <connections>
-                                    <action selector="incrementProgress" destination="BYZ-38-t0r" eventType="touchUpInside" id="qiO-Hb-0cM"/>
+                                    <action selector="incrementProgress" destination="BYZ-38-t0r" eventType="touchUpInside" id="G7a-JA-bRx"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="esu-nR-G2J" customClass="ProgressSearchBar" customModule="Example" customModuleProvider="target">
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="u6Q-zg-995" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CQ6-mB-PeP"/>
-                            <constraint firstItem="u6Q-zg-995" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qVF-J4-USH"/>
-                            <constraint firstAttribute="trailing" secondItem="U9a-eg-d6U" secondAttribute="trailing" id="tlO-H6-i6j"/>
-                            <constraint firstItem="U9a-eg-d6U" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wmf-1F-dRZ"/>
-                            <constraint firstItem="U9a-eg-d6U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="x9O-oV-MXl"/>
+                            <constraint firstItem="E23-pB-GlZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Elb-tt-Imc"/>
+                            <constraint firstItem="esu-nR-G2J" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="HZ0-KV-ty9"/>
+                            <constraint firstAttribute="trailing" secondItem="esu-nR-G2J" secondAttribute="trailing" id="TEK-7M-yG1"/>
+                            <constraint firstItem="esu-nR-G2J" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n9r-rh-bZm"/>
+                            <constraint firstItem="E23-pB-GlZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nBI-eF-FOk"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="progressSearchBar" destination="U9a-eg-d6U" id="fKO-o9-vXS"/>
+                        <outlet property="progressSearchBar" destination="esu-nR-G2J" id="2sm-IE-RTY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

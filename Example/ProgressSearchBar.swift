@@ -2,12 +2,13 @@
 //  ProgressableSearchBar.swift
 //  Progressable
 //
-//  Created by Martin MOIZARD-LANVIN on 21/09/2016.
+//  Created by Martin MOIZARD-LANVIN on 27/09/2016.
 //  Copyright © 2016 Martin Moizard. All rights reserved.
 //
 
 import Foundation
 import UIKit
+import Progressable
 
 class ProgressSearchBar: UISearchBar, Progressable {
     override init(frame: CGRect) {

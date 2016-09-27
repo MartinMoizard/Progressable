@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "86F980361D92AA820099A69C"
-               BuildableName = "Progressable.app"
+               BlueprintIdentifier = "86EA19B21D9AA9A100C3CF12"
+               BuildableName = "Progressable.framework"
                BlueprintName = "Progressable"
                ReferencedContainer = "container:Progressable.xcodeproj">
             </BuildableReference>
@@ -32,19 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "86F9804A1D92AA820099A69C"
+               BlueprintIdentifier = "86EA19BB1D9AA9A100C3CF12"
                BuildableName = "ProgressableTests.xctest"
                BlueprintName = "ProgressableTests"
-               ReferencedContainer = "container:Progressable.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "86F980551D92AA820099A69C"
-               BuildableName = "ProgressableUITests.xctest"
-               BlueprintName = "ProgressableUITests"
                ReferencedContainer = "container:Progressable.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -52,8 +42,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "86F980361D92AA820099A69C"
-            BuildableName = "Progressable.app"
+            BlueprintIdentifier = "86EA19B21D9AA9A100C3CF12"
+            BuildableName = "Progressable.framework"
             BlueprintName = "Progressable"
             ReferencedContainer = "container:Progressable.xcodeproj">
          </BuildableReference>
@@ -71,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "86F980361D92AA820099A69C"
-            BuildableName = "Progressable.app"
+            BlueprintIdentifier = "86EA19B21D9AA9A100C3CF12"
+            BuildableName = "Progressable.framework"
             BlueprintName = "Progressable"
             ReferencedContainer = "container:Progressable.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "86F980361D92AA820099A69C"
-            BuildableName = "Progressable.app"
+            BlueprintIdentifier = "86EA19B21D9AA9A100C3CF12"
+            BuildableName = "Progressable.framework"
             BlueprintName = "Progressable"
             ReferencedContainer = "container:Progressable.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

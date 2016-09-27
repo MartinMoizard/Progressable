@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "Progressable"
-  s.version               = "0.0.3"
+  s.version               = "0.1.0"
   s.summary               = "Add an horizontal loading bar to any UIView"
 
   s.description           = "Lightweight component to create an horizontal loading line on any UIView."
@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.source                = { :git => "https://github.com/MartinMoizard/Progressable.git", :tag => s.version.to_s }
 
-  s.source_files          = "Source/*.swift"
+  s.source_files          = "Progressable/**/*.swift"
   s.requires_arc          = true
 end

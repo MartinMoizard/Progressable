@@ -2,7 +2,7 @@
 //  ProgressableTests.swift
 //  ProgressableTests
 //
-//  Created by Martin MOIZARD-LANVIN on 21/09/2016.
+//  Created by Martin MOIZARD-LANVIN on 27/09/2016.
 //  Copyright © 2016 Martin Moizard. All rights reserved.
 //
 
