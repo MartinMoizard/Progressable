@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol Progressable: class {
+public protocol Progressable: class {
     var progress: CGFloat { get set }
     var progressLineWidth: CGFloat { get set }
     var progressColor: UIColor? { get set }
