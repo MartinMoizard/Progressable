@@ -6,7 +6,7 @@ Progressable is a simple component to help you add a simple **animatable progres
 
 ## Usage
 
-3 simple stops to follow:
+3 simple steps to follow:
 
 - make your `UIView` conform to the `Progressable` protocol.
 - call `self.initProgress()` in `init(frame: CGRect)` and `init?(coder aDecoder: NSCoder)`.
