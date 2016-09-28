@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 public protocol Progressable: class {
     var progress: CGFloat { get set }
@@ -33,6 +34,7 @@ extension Progressable where Self: UIView {
             }
         }
         set {
+            self.progressLayer.removeAllAnimations()
             objc_setAssociatedObject(self, &progressAttr, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             self.setNeedsLayout()
         }
@@ -90,22 +92,44 @@ extension Progressable where Self: UIView {
     }
     
     public func layoutProgress() {
-        self.progressLayer.frame = self.frame(forProgress: self.progress)
+        disableImplicitAnimations {
+            self.progressLayer.frame = self.frame(forProgress: self.progress)
+        }
+    }
+    
+    fileprivate func disableImplicitAnimations(updates: () -> ()) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        updates()
+        CATransaction.commit()
     }
     
     public func setProgress(progress: CGFloat, withDuration duration: TimeInterval) {
+        let progressLayer = self.progressLayer
         let toFrame = self.frame(forProgress: progress)
         let toBounds = CGRect(x: 0, y: 0,
                               width: toFrame.size.width,
                               height: toFrame.size.height)
         
         let animation = CABasicAnimation(keyPath: "bounds")
-        animation.fromValue = NSValue(cgRect: self.progressLayer.bounds)
+        animation.fromValue = NSValue(cgRect: self.progressLayer.visibleBounds())
         animation.toValue = NSValue(cgRect: toBounds)
         animation.duration = duration
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         
         self.progress = progress
-        self.progressLayer.frame = toFrame
-        self.progressLayer.add(animation, forKey: "bounds")
+        progressLayer.frame = toFrame
+        progressLayer.add(animation, forKey: "bounds")
+    }
+}
+
+extension CALayer {
+    fileprivate func visibleBounds() -> CGRect {
+        if self.animation(forKey: "bounds") != nil {
+            let currentLayer = self.presentation()
+            return (currentLayer?.value(forKey: "bounds") as! NSValue).cgRectValue
+        } else {
+            return self.bounds
+        }
     }
 }
